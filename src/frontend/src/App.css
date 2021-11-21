@@ -1,0 +1,32 @@
+/*https://coolors.co/5b2a86-8d86c9-08090a*/
+/*
+Primary: #5B2A86
+Secondary: #8D86C9
+Other: #08090A
+ */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    margin-bottom: 60px; /* Margin bottom by footer height */
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px; /* Set the fixed height of the footer here */
+    color: #fff;
+    background-color: var(--taca-secondary);
+}
+
+:root {
+    --taca-primary: #5B2A86;
+    --taca-secondary: #8D86C9;
+    --taca-other: #08090A;
+}
+
+* {
+    font-family: 'Ubuntu', sans-serif;
+}
+

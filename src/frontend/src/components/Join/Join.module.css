@@ -1,0 +1,24 @@
+
+.join {
+    width: 30rem;
+}
+
+.card-header {
+    background-color: var(--taca-other);
+    color: #fff;
+}
+
+.card-footer {
+    background-color: var(--taca-secondary);
+}
+
+.joinButton {
+    background-color: var(--taca-primary);
+    border-width: 0;
+}
+
+.joinButton:hover {
+    border: 0;
+    background-color: var(--taca-primary);
+    filter: brightness(150%);
+}

@@ -1,18 +1,29 @@
 import './App.css'
+import React from 'react';
 import {Container, Nav, Navbar} from "react-bootstrap";
+import {HashRouter, Route, Switch} from 'react-router-dom';
+
+const JoinRoom = React.lazy(() => import('./views/JoinRoom/JoinRoom'));
 
 function App() {
   return (
     <div className="App">
-      <header>
-          <Navbar bg="dark" variant="dark">
-              <Container>
-                  <Navbar.Brand href="#home">TACA</Navbar.Brand>
-              </Container>
-          </Navbar>
-          <br />
+        <Navbar bg="dark" variant="dark">
+            <Container>
+                <Navbar.Brand href="#home">TACA</Navbar.Brand>
+            </Container>
+        </Navbar>
+        <br />
+        <div className="container">
+            <HashRouter>
+                <React.Suspense fallback={"Loading..."}>
+                    <Switch>
+                        <Route path="/join-room"  component={JoinRoom} name="Join Room" render={(props) => <JoinRoom {...props} />} />
+                    </Switch>
+                </React.Suspense>
+            </HashRouter>
+        </div>
 
-      </header>
     </div>
   )
 }
