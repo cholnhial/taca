@@ -18,4 +18,13 @@ public class UserService {
         User user  = new User(null ,username, false);
         this.userRepository.save(user);
     }
+
+    /**
+     * Checks if a username already exists
+     * @param username the username to check
+     * @return true if it exists false otherwise
+     */
+    public Boolean doesUserExist(String username) {
+        return this.userRepository.existsByUsername(username);
+    }
 }
