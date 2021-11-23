@@ -1,7 +1,9 @@
 package com.cholnhial.taca.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -9,6 +11,8 @@ import javax.persistence.*;
 @Table
 @Data
 @EqualsAndHashCode(of = {"roomTopicId", "id"})
+@AllArgsConstructor
+@NoArgsConstructor
 public class Room {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
