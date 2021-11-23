@@ -18,7 +18,7 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/taca-websocket").setAllowedOriginPatterns("*").withSockJS();
+        registry.addEndpoint("/taca-websocket").withSockJS();
     }
 
 }

@@ -18,7 +18,7 @@ function App() {
             <HashRouter>
                 <React.Suspense fallback={"Loading..."}>
                     <Switch>
-                        <Route path="/join-room"  component={JoinRoom} name="Join Room" render={(props) => <JoinRoom {...props} />} />
+                        <Route path="/join-room"  name="Join Room" render={(props) => <JoinRoom {...props} />} />
                     </Switch>
                 </React.Suspense>
             </HashRouter>
