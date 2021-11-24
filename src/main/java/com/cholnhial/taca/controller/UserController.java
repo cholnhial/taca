@@ -7,6 +7,7 @@ import com.cholnhial.taca.service.UserService;
 import com.cholnhial.taca.service.dto.JoinRoomRequestDTO;
 import com.cholnhial.taca.service.dto.JoinRoomResponseDTO;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.time.ZonedDateTime;
 import java.util.Set;
 
 @RestController
@@ -33,18 +35,28 @@ public class UserController {
      * @return the ResponseEntity with (200 OK) and body containing JoinRoomResponseDTO
      */
     @PostMapping("/join")
-    public ResponseEntity<JoinRoomResponseDTO> joinRoom(@RequestBody @Valid JoinRoomRequestDTO joinRoom) {
+    public ResponseEntity<?> joinRoom(@RequestBody @Valid JoinRoomRequestDTO joinRoom) {
         var responseBuilder = JoinRoomResponseDTO.builder();
-        responseBuilder.isNameTaken(this.userService.doesUserExist(joinRoom.getUsername()));
-        User user;
-        if (!userService.doesUserExist(joinRoom.getUsername())) {
-          user =  userService.saveNewUser(joinRoom.getUsername());
+        responseBuilder.isNameTaken(false);
+
+        User user = null;
+        if (joinRoom.getSecret() != null) {
+            user = userService.getUserBySecret(joinRoom.getSecret());
+            if(user == null) {
+                return ResponseEntity.badRequest().body(Strings.EMPTY);
+            }
+            responseBuilder.secret(user.getSecret());
         } else {
-            user = userService.getUserByUsername(joinRoom.getUsername());
+            if(userService.doesUserExist(joinRoom.getUsername())) {
+                responseBuilder.isNameTaken(true);
+            } else {
+                user =  userService.saveNewUser(joinRoom.getUsername());
+                responseBuilder.secret(user.getSecret());
+            }
         }
 
         Room room = null;
-        if (user.getIsChatting()) {
+        if (user != null && user.getIsChatting()) {
             // get existing chatRoom
             room = roomService.findExistingRoom(joinRoom.getUsername());
         } else {
@@ -56,7 +68,6 @@ public class UserController {
             }
         }
         responseBuilder.roomId(room != null ? room.getRoomTopicId() : null);
-
         return ResponseEntity.ok(responseBuilder.build());
     }
 }

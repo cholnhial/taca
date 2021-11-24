@@ -1,5 +1,8 @@
 export {
     joinRoom,
     setJoinInfo,
-    joinFailed
+    joinFailed,
+    joinTimedOut,
+    joinReset,
+    setSecret
 } from './joinRoom';

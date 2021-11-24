@@ -11,4 +11,6 @@ import javax.validation.constraints.NotNull;
 public class JoinRoomRequestDTO {
     @NotNull
     private String username;
+
+    private String secret;
 }

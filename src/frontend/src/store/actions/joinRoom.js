@@ -14,14 +14,56 @@ export const joinFailed = () => {
     }
 };
 
-export const joinRoom = (username) => {
+export const joinTimedOut = () => {
+    return {
+        type: actionTypes.JOIN_TIMEDOUT
+    }
+}
+
+export const joinReset = () => {
+    return {
+        type: actionTypes.JOIN_RESET
+    }
+}
+
+export const setSecret = (secret) => {
+    return {
+        type: actionTypes.SET_SECRET,
+        secret: secret
+    }
+}
+
+export const joinRoom = (username, secret, tries) => {
+    console.log("Secret: " + secret)
+    let interval = null;
+    let totalRetries  = 0;
     return (dispatch) => {
-        axios.post(`/user/join/`, {username: username})
-            .then((response) => {
-                dispatch(setJoinInfo(response.data))
-            })
-            .catch((error) => {
-                dispatch(joinFailed())
-            })
+      interval = setInterval(() => {
+          totalRetries++;
+          if (totalRetries < tries) {
+              axios.post(`/user/join/`, {username: username, secret: secret})
+                  .then((response) => {
+                      if (totalRetries === 1) {
+                          // first request contains secret
+                          secret = response.data.secret;
+                          dispatch(setSecret(response.data.secret))
+                      }
+                      dispatch(setJoinInfo(response.data))
+                      if (response.data.isNameTaken) {
+                          clearInterval(interval);
+                      }
+
+                  })
+                  .catch((error) => {
+                      dispatch(joinFailed())
+                  })
+          }
+
+          if(totalRetries == tries) {
+              clearInterval(interval);
+              dispatch(joinTimedOut())
+          }
+
+      }, 2000)
     }
 }

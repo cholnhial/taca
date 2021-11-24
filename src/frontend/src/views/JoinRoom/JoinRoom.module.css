@@ -1,0 +1,20 @@
+.spinnerBorder {
+    height: 5rem;
+    width: 5rem;
+    color: var(--taca-primary)
+}
+
+.joinText {
+    color: var(--taca-secondary)
+}
+
+.TryAgainButton {
+    background-color: var(--taca-primary);
+    border-width: 0;
+}
+
+.TryAgainButton:hover {
+    border: 0;
+    background-color: var(--taca-primary);
+    filter: brightness(150%);
+}

@@ -3,6 +3,8 @@ package com.cholnhial.taca.service;
 import com.cholnhial.taca.domain.User;
 import com.cholnhial.taca.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,7 @@ public class UserService {
      * @param username the unique username
      */
     public User saveNewUser(String username) {
-        User user  = new User(null ,username, false);
+        User user  = new User(null ,username, RandomStringUtils.randomAlphabetic(10), false);
        return this.userRepository.save(user);
     }
 
@@ -63,5 +65,9 @@ public class UserService {
      */
     public User getUserByUsername(String username) {
         return this.userRepository.findByUsername(username).get();
+    }
+
+    public User getUserBySecret(String secret) {
+        return this.userRepository.findBySecret(secret).get();
     }
 }

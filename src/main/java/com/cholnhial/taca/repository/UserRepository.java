@@ -20,4 +20,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
         Page<User> findNotChatting(Pageable pageable, @Param("username") String excludeUsername);
 
         Optional<User> findByUsername(String username);
+
+        Optional<User> findBySecret(String secret);
 }
