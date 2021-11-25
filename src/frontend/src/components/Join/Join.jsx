@@ -15,7 +15,7 @@ const Join = (props) => {
         error = <p className="text-danger">The name you entered has already been taken</p>
     }
     return (
-        <Card className={[styles.join, "mx-auto"]}>
+        <Card className={[styles.join, "mx-auto", "border-0"]}>
             <Card.Header className={[styles['card-header']]}>JOIN</Card.Header>
             <Card.Body className="text-center">
                 <Card.Title>Join the fun</Card.Title>

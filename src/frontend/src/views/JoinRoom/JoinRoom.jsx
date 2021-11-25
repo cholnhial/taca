@@ -5,7 +5,7 @@ import axios from '../../axios-api';
 import { connect } from 'react-redux';
 import withErrorHandler from "../../hoc/withErrorHandler";
 import styles from './JoinRoom.module.css'
-import {Button, Spinner} from "react-bootstrap";
+import {Button, Card, Spinner} from "react-bootstrap";
 
 const MAX_JOIN_RETRIES = 30;
 
@@ -48,23 +48,31 @@ const JoinRoom = (props) => {
 
     if (isLoading) {
         display  = (
-            <div className="mx-auto text-center" style={{marginTop: "15%"}}>
+            <Card className="mx-auto" style={{width: "25rem"}}>
+                <Card.Body>
+            <div className="mx-auto text-center" style={{marginTop: "5%"}}>
                 <Spinner className={styles.spinnerBorder} animation="border" />
                 <p className={['fs-2', styles.joinText].join(' ')}>Joining...</p>
             </div>
+                </Card.Body>
+            </Card>
 
         )
     }
     else if (props.timedOut) {
-        display = (<div className="mx-auto text-center">
+        display = (
+            <Card className="mx-auto" style={{width: "25rem"}}>
+                <Card.Body>
+            <div className="mx-auto text-center">
                      <p className={['fs-1', styles.joinText].join(' ')}>Oops! Timeout</p>
-                      <p>We couldn't find you partner</p>
+                      <p>We couldn't find you a partner</p>
                       <Button onClick={handleOnTryJoinAgain}  className={[styles.TryAgainButton]} >Try Again</Button>
-                </div>)
+            </div>
+                </Card.Body>
+            </Card>)
     } else {
         display = <Join username={user} isNameTaken={props.isNameTaken} onJoin={handleOnJoin} />
     }
-
 
     return (
         display
