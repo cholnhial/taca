@@ -2,6 +2,7 @@ import './App.css'
 import React from 'react';
 import {Container, Nav, Navbar} from "react-bootstrap";
 import {HashRouter, Route, Switch} from 'react-router-dom';
+import ChatRoom from "./views/ChatRoom/ChatRoom";
 
 const JoinRoom = React.lazy(() => import('./views/JoinRoom/JoinRoom'));
 
@@ -19,6 +20,7 @@ function App() {
                 <React.Suspense fallback={"Loading..."}>
                     <Switch>
                         <Route path="/join-room"  name="Join Room" render={(props) => <JoinRoom {...props} />} />
+                        <Route path="/chat-room"  name="Chat Room" render={(props) => <ChatRoom {...props} />} />
                     </Switch>
                 </React.Suspense>
             </HashRouter>
