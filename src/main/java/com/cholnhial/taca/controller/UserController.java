@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.time.ZonedDateTime;
 import java.util.Set;
 
 @RestController
@@ -38,6 +37,7 @@ public class UserController {
     public ResponseEntity<?> joinRoom(@RequestBody @Valid JoinRoomRequestDTO joinRoom) {
         var responseBuilder = JoinRoomResponseDTO.builder();
         responseBuilder.isNameTaken(false);
+        responseBuilder.otherUser(null);
 
         User user = null;
         if (joinRoom.getSecret() != null) {
@@ -65,6 +65,7 @@ public class UserController {
             if (userNotInChat != null) {
                 var users = Set.of(userNotInChat, user);
                 room = roomService.createRoomForUsers(users);
+                responseBuilder.otherUser(userNotInChat.getUsername());
             }
         }
         responseBuilder.roomId(room != null ? room.getRoomTopicId() : null);
