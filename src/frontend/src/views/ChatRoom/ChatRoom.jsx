@@ -1,8 +1,9 @@
+import Chat from "../../components/Chat/Chat";
 
 const ChatRoom = (props) => {
 
     return (
-        <p>Hello World</p>
+        <Chat/>
     )
 }
 

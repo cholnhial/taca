@@ -3,15 +3,6 @@
     width: 30rem;
 }
 
-.card-header {
-    background-color: var(--taca-other);
-    color: #fff;
-}
-
-.card-footer {
-    background-color: var(--taca-secondary);
-}
-
 .joinButton {
     background-color: var(--taca-primary);
     border-width: 0;

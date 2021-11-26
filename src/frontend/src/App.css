@@ -10,7 +10,7 @@ html {
 }
 body {
     margin-bottom: 60px; /* Margin bottom by footer height */
-    background: url("assets/images/chat-background.jpeg") no-repeat center center fixed;
+    background: url("https://images.unsplash.com/photo-1604208485423-f19bc2aaae2d?ixid=MnwyNjI1Nzd8MHwxfHNlYXJjaHwyfHxhbmdyeXxlbnwxfDB8fHwxNjM3OTA3NjA2&ixlib=rb-1.2.1") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -22,6 +22,26 @@ body {
     width: 100%;
     height: 60px; /* Set the fixed height of the footer here */
     color: #fff;
+    background-color: var(--taca-secondary);
+}
+
+.card-header {
+    background-color: var(--taca-other);
+    color: #fff;
+}
+
+.tacaButton {
+    background-color: var(--taca-primary);
+    border-width: 0;
+}
+
+.tacaButton:hover {
+    border: 0;
+    background-color: var(--taca-primary);
+    filter: brightness(150%);
+}
+
+.card-footer {
     background-color: var(--taca-secondary);
 }
 
