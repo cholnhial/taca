@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
+import {useNavigate} from "react-router-dom";
 import Join from '../../components/Join/Join'
 import * as actions from '../../store/actions';
 import axios from '../../axios-api';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import withErrorHandler from "../../hoc/withErrorHandler";
 import styles from './JoinRoom.module.css'
 import {Button, Card, Spinner} from "react-bootstrap";
@@ -13,6 +14,7 @@ const JoinRoom = (props) => {
     const [isLoading, setIsLoading] = useState(false)
     const [user, setUser] = useState('')
     const [secret, setSecret] = useState(null)
+    let navigate = useNavigate();
 
     useEffect(() => {
         if(props.timedOut || props.isNameTaken) {
@@ -28,7 +30,7 @@ const JoinRoom = (props) => {
 
     useEffect(() => {
         if (props.roomId != null) {
-            console.log("Room found!")
+            navigate("/chat-room", { replace: true });
             setIsLoading(false);
         }
     }, [props.roomId]);

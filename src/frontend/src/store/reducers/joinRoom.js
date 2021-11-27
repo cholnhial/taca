@@ -1,9 +1,7 @@
 import * as actionTypes from '../actions/actionTypes'
-import axios from '../../axios-api';
 import {updateObject} from "../utility";
 
 const initialState = {
-    firstJoin: true,
     roomId: null,
     secret: null,
     timedOut: false,
@@ -15,7 +13,7 @@ const setJoinInfo = (state, action) => {
     return updateObject(state, {
         roomId: action.joinInfo.roomId,
         isNameTaken: action.joinInfo.isNameTaken,
-        firstJoin: false
+        otherUser: action.joinInfo.otherUser
     });
 }
 

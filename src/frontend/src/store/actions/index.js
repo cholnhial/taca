@@ -1,3 +1,5 @@
+import {getMessageTone} from "./chatRoom";
+
 export {
     joinRoom,
     setJoinInfo,
@@ -6,3 +8,9 @@ export {
     joinReset,
     setSecret
 } from './joinRoom';
+
+export {
+    setMessageTone,
+    getMessageToneFailed,
+    getMessageTone
+} from './chatRoom';

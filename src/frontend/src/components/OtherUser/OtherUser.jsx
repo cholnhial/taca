@@ -19,3 +19,5 @@ const OtherUser = (props) => {
         </Fragment>
     )
 }
+
+export default OtherUser;

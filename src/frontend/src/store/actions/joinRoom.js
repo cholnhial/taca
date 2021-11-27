@@ -34,7 +34,6 @@ export const setSecret = (secret) => {
 }
 
 export const joinRoom = (username, secret, tries) => {
-    console.log("Secret: " + secret)
     let interval = null;
     let totalRetries  = 0;
     return (dispatch) => {
@@ -49,7 +48,7 @@ export const joinRoom = (username, secret, tries) => {
                           dispatch(setSecret(response.data.secret))
                       }
                       dispatch(setJoinInfo(response.data))
-                      if (response.data.isNameTaken) {
+                      if (response.data.isNameTaken || response.data.roomId) {
                           clearInterval(interval);
                       }
 

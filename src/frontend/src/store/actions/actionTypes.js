@@ -3,3 +3,10 @@ export const JOIN_FAILED = 'JOIN_FAILED';
 export const JOIN_TIMEDOUT = 'JOIN_TIMEDOUT';
 export const JOIN_RESET = 'JOIN_RESET';
 export const SET_SECRET = 'SET_SECRET';
+
+export const GET_MESSAGE_TONE = 'GET_MESSAGE_TONE';
+export const SET_MESSAGE_TONE  = 'SET_MESSAGE_TONE';
+export const GET_MESSAGE_TONE_FAILED = 'GET_MESSAGE_TONE_FAILED';
+export const SET_MESSAGE = 'SET_MESSAGE';
+export const SEND_MESSAGE = 'SEND_MESSAGE';
+

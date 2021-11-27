@@ -1,9 +1,10 @@
 
 /* each IBM Watson Tone Analyzer emotion and its image mapping and friendly text */
-const emojiMap = {
-    anger: {img: "", text: "angry"},
-    joy: {img: "", text: "joyful"},
-    disgust: {img: "", text: "disgusted"},
-    fear: {img: "", text: "fearful"},
-    unknown: {img: "", text: "-"},
+export const emojiMap = {
+    anger: {img: "angry.png", text: "angry"},
+    joy: {img: "joy.png", text: "joyful"},
+    disgust: {img: "disgusted", text: "disgusted"},
+    fear: {img: "fear.png", text: "fearful"},
+    sadness: {img: "sad.png", text: "sad"},
+    unknown: {img: "unknown.png", text: "---"},
 };
