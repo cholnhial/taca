@@ -4,22 +4,32 @@ import {connect} from "react-redux";
 import withErrorHandler from "../../hoc/withErrorHandler";
 import axios from "../../axios-api";
 import _debounce from 'lodash/debounce';
-import {useCallback} from "react";
+import {useCallback, useEffect, useState} from "react";
 
 const ChatRoom = (props) => {
+    const [message, setMessage] = useState('');
 
     const debounceMessageInputFn = useCallback(_debounce(handleOnMessageInputDebounceFn, 250), []);
+
+    useEffect(() => {
+        props.connectToRoom(props.roomId);
+    }, [])
 
     function handleOnMessageInputDebounceFn(message) {
         props.getMessageTone(message);
     }
 
     const handleOnMessageInputChange = (message) => {
+        setMessage(message);
         debounceMessageInputFn(message);
     }
 
+    const handleOnSendMessage = () => {
+        props.sendMessage(message, props.roomId, props.username);
+    }
+
     return (
-        <Chat username={props.otherUser} messageTone={props.messageTone} onMessageChange={handleOnMessageInputChange} otherUserMessageTone={props.otherUserLastMessageTone}/>
+        <Chat otherUsername={props.otherUser} username={props.username} sendMessageHandler={handleOnSendMessage} messages={props.messages} roomId={props.roomId} messageTone={props.messageTone} onMessageChange={handleOnMessageInputChange} otherUserMessageTone={props.otherUserLastMessageTone}/>
     )
 }
 
@@ -29,13 +39,17 @@ const mapStateToProps = (state) => {
         roomId: state.joinRoom.roomId,
         secret: state.joinRoom.secret,
         otherUserLastMessageTone: state.chatRoom.otherUserLastMessageTone,
+        messages: state.chatRoom.messages,
+        username: state.joinRoom.username,
         messageTone: state.chatRoom.messageTone
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getMessageTone: (message) => dispatch(actions.getMessageTone(message))
+        getMessageTone: (message) => dispatch(actions.getMessageTone(message)),
+        sendMessage: (message, roomId, username) => dispatch(actions.sendMessage(message,roomId, username)),
+        connectToRoom: (roomId) => dispatch(actions.connect(roomId))
     }
 }
 

@@ -6,11 +6,15 @@ export {
     joinFailed,
     joinTimedOut,
     joinReset,
-    setSecret
+    setSecret,
+    setUsername
 } from './joinRoom';
 
 export {
     setMessageTone,
     getMessageToneFailed,
-    getMessageTone
+    getMessageTone,
+    connect,
+    addMessage,
+    sendMessage
 } from './chatRoom';

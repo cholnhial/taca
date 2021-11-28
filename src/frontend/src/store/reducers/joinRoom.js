@@ -6,6 +6,7 @@ const initialState = {
     secret: null,
     timedOut: false,
     isNameTaken: false,
+    username: '',
     error: false
 };
 
@@ -42,6 +43,12 @@ const setSecret = (state, action) => {
     })
 }
 
+const setUsername = (state, action) => {
+    return updateObject(state,
+        {
+            username: action.username
+        });
+}
 const reducer = (state = initialState, action) => {
 
     switch(action.type) {
@@ -50,6 +57,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.JOIN_TIMEDOUT: return joinTimedOut(state, action)
         case actionTypes.JOIN_RESET: return joinReset(state, action)
         case actionTypes.SET_SECRET: return setSecret(state, action)
+        case actionTypes.SET_USERNAME: return setUsername(state, action)
         default: return state;
     }
 };

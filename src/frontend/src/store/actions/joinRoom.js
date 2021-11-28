@@ -66,3 +66,10 @@ export const joinRoom = (username, secret, tries) => {
       }, 2000)
     }
 }
+
+export const setUsername = (username) => {
+    return {
+        type: actionTypes.SET_USERNAME,
+        username: username
+    }
+}

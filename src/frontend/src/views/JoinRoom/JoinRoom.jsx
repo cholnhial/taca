@@ -39,6 +39,7 @@ const JoinRoom = (props) => {
         props.onJoinReset()
         setUser(username)
         setIsLoading(true)
+        props.setUsername(username)
         props.onJoin(username, secret, MAX_JOIN_RETRIES)
     }
 
@@ -88,6 +89,7 @@ const mapStateToProps = (state) => {
         secret: state.joinRoom.secret,
         isNameTaken: state.joinRoom.isNameTaken,
         timedOut: state.joinRoom.timedOut,
+        username: state.joinRoom.username,
         firstJoin: state.joinRoom.firstJoin
     }
 }
@@ -95,6 +97,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onJoin: (username, secret, tries) => dispatch(actions.joinRoom(username, secret, tries)),
+        setUsername: (username) => dispatch(actions.setUsername(username)),
         onJoinReset: () => dispatch(actions.joinReset())
     }
 }
