@@ -8,3 +8,5 @@ export const emojiMap = {
     sadness: {img: "sad.png", text: "sad"},
     unknown: {img: "unknown.png", text: "---"},
 };
+
+export const RESOURCES_BASE_URL = "/src/assets";

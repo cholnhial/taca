@@ -37,25 +37,28 @@ export const joinRoom = (username, secret, tries) => {
     let interval = null;
     let totalRetries  = 0;
     return (dispatch) => {
-      interval = setInterval(() => {
+      interval = setInterval(async () => {
           totalRetries++;
           if (totalRetries < tries) {
-              axios.post(`/user/join/`, {username: username, secret: secret})
-                  .then((response) => {
-                      if (totalRetries === 1) {
-                          // first request contains secret
-                          secret = response.data.secret;
-                          dispatch(setSecret(response.data.secret))
-                      }
-                      dispatch(setJoinInfo(response.data))
-                      if (response.data.isNameTaken || response.data.roomId) {
-                          clearInterval(interval);
-                      }
-
-                  })
-                  .catch((error) => {
-                      dispatch(joinFailed())
-                  })
+              try {
+                    let response  = await axios.post(`/user/join/`, {username: username, secret: secret})
+                  if (response.status != 200) {
+                      dispatch(joinFailed());
+                  }
+                 if (response.status == 200) {
+                     if (totalRetries === 1) {
+                         // first request contains secret
+                         secret = response.data.secret;
+                         dispatch(setSecret(response.data.secret))
+                     }
+                     dispatch(setJoinInfo(response.data))
+                     if (response.data.isNameTaken || response.data.roomId) {
+                         clearInterval(interval);
+                     }
+                 }
+              } catch(err) {
+                  dispatch(joinFailed())
+              }
           }
 
           if(totalRetries == tries) {
@@ -63,7 +66,7 @@ export const joinRoom = (username, secret, tries) => {
               dispatch(joinTimedOut())
           }
 
-      }, 2000)
+      }, 5000)
     }
 }
 

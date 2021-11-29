@@ -65,7 +65,14 @@ public class UserController {
             if (userNotInChat != null) {
                 var users = Set.of(userNotInChat, user);
                 room = roomService.createRoomForUsers(users);
-                responseBuilder.otherUser(userNotInChat.getUsername());
+            }
+        }
+        if (room != null) {
+            if (!room.getUser1().getUsername().equals(user.getUsername())) {
+                responseBuilder.otherUser(room.getUser1().getUsername());
+            }
+            if (!room.getUser2().getUsername().equals(user.getUsername())) {
+                responseBuilder.otherUser(room.getUser2().getUsername());
             }
         }
         responseBuilder.roomId(room != null ? room.getRoomTopicId() : null);

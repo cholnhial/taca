@@ -5,7 +5,7 @@ const Message = (props) => {
     if (props.message.from != props.username) {
         component = (
             <div className="yours messages">
-                <div className="message rounded">
+                <div className="message">
                     {props.message.message}
                 </div>
             </div>

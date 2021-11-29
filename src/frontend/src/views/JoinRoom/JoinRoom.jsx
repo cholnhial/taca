@@ -8,7 +8,7 @@ import withErrorHandler from "../../hoc/withErrorHandler";
 import styles from './JoinRoom.module.css'
 import {Button, Card, Spinner} from "react-bootstrap";
 
-const MAX_JOIN_RETRIES = 30;
+const MAX_JOIN_RETRIES = 6;
 
 const JoinRoom = (props) => {
     const [isLoading, setIsLoading] = useState(false)

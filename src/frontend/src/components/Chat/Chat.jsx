@@ -1,19 +1,22 @@
 import {Button, Card, Col, FloatingLabel, Form, Row} from "react-bootstrap";
 import styles from './Chat.module.css'
-import React from "react";
+import React, {useState} from "react";
 import MessageTone from "../MessageTone/MessageTone";
 import OtherUser from "../OtherUser/OtherUser";
 import Message from "../Message/Message";
 import './Chat.css';
 
 const Chat = (props) => {
+    const [message, setMessage] = useState('')
 
     const handleMessageInputChange = (event) => {
+        setMessage(event.target.value);
         props.onMessageChange(event.target.value);
     }
 
     const handleOnSendMessage = () => {
         props.sendMessageHandler();
+        setMessage('');
     }
 
     return (
@@ -25,7 +28,7 @@ const Chat = (props) => {
             <Card.Body className="text-center overflow-scroll" style={{height: "15rem"}}>
                 {
                     props.messages.map((m, i) => {
-                        return <Message key={i} username={m.from} last={props.messages.length == i+1} message={m} />
+                        return <Message key={i} username={props.username} last={props.messages.length == i+1} message={m} />
                     })
                 }
             </Card.Body>
@@ -33,6 +36,7 @@ const Chat = (props) => {
                 <FloatingLabel controlId="floatingTextarea2" label="Message">
                     <Form.Control
                         as="textarea"
+                        value={message}
                         onChange={handleMessageInputChange}
                         placeholder="Hi..."
                         style={{ height: '60px' }}
