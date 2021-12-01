@@ -20,7 +20,7 @@ public class Room {
     @Id
     private Long id;
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Message> messages = new HashSet<>();
 
     private String roomTopicId;
