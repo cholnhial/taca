@@ -23,6 +23,7 @@ public class Message {
     @ManyToOne
     private Room room;
 
+    @Column(name = "_from")
     private String from;
 
     private String message;

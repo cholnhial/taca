@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -55,11 +56,21 @@ public class RoomService {
      * @param roomId the roomId to save the message for
      * @param message the message to save
      */
-    public void saveMessageForRoom(Long roomId, UserMessageDTO message) {
-        this.roomRepository.findById(roomId).ifPresent(r -> {
+    public void saveMessageForRoom(String roomId, UserMessageDTO message) {
+        this.getRoomByRoomTopicId(roomId).ifPresent(r -> {
             r.getMessages().add(new Message(null, r, message.getFrom(),
                     message.getMessage(), LocalDateTime.now()));
             this.roomRepository.save(r);
         });
+    }
+
+    /**
+     * Finds the Room by a room topic id (a random alphanumeric string of length of 10)
+     *
+     * @param roomId the room topic id
+     * @return room found or null
+     */
+    public Optional<Room> getRoomByRoomTopicId(String roomId) {
+        return this.roomRepository.findRoomByRoomTopicId(roomId);
     }
 }

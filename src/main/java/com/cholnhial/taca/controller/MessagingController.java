@@ -23,7 +23,7 @@ public class MessagingController {
     public UserMessageDTO message(@DestinationVariable String roomId, UserMessageDTO message) {
         message.setTone(ibmToneAnalyzerService.getMessageTone(message.getMessage()));
         message.setSent(LocalDateTime.now());
-        roomService.saveMessageForRoom(Long.valueOf(roomId), message);
+        roomService.saveMessageForRoom(roomId, message);
         return message;
     }
 }
