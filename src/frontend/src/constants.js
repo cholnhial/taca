@@ -9,4 +9,4 @@ export const emojiMap = {
     unknown: {img: "unknown.png", text: "---"},
 };
 
-export const RESOURCES_BASE_URL = "/src/res";
+export const RESOURCES_BASE_URL = import.meta.env.VITE_RESOURCES_BASE;

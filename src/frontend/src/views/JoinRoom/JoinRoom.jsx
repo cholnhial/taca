@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import Join from '../../components/Join/Join'
 import * as actions from '../../store/actions';
 import axios from '../../axios-api';
@@ -14,7 +14,7 @@ const JoinRoom = (props) => {
     const [isLoading, setIsLoading] = useState(false)
     const [user, setUser] = useState('')
     const [secret, setSecret] = useState(null)
-    let navigate = useNavigate();
+    let history = useHistory();
 
     useEffect(() => {
         if(props.timedOut || props.isNameTaken) {
@@ -30,7 +30,7 @@ const JoinRoom = (props) => {
 
     useEffect(() => {
         if (props.roomId != null) {
-            navigate("/chat-room", { replace: true });
+            history.push("/chat-room");
             setIsLoading(false);
         }
     }, [props.roomId]);

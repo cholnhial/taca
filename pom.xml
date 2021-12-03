@@ -144,7 +144,7 @@
 				<artifactId>maven-resources-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>Copy Vue frontend into Spring Boot target static folder</id>
+						<id>Copy React frontend into Spring Boot target static folder</id>
 						<phase>process-resources</phase>
 						<goals>
 							<goal>copy-resources</goal>
@@ -154,6 +154,22 @@
 							<resources>
 								<resource>
 									<directory>src/frontend/dist</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>Copy resources for frontend into Spring Boot target static folder</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/classes/static/res</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/frontend/src/res</directory>
 									<filtering>true</filtering>
 								</resource>
 							</resources>
