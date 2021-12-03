@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from "../../axios-api";
-import {emojiMap} from "../../constants";
+import {API_BASE_URL, emojiMap} from "../../constants";
 
 export const setMessageTone = (messageTone) => {
     return {
@@ -38,7 +38,7 @@ export const addMessage = (messageObj) => {
 let stompClient = null;
 export const connect = (roomId) => {
    return (dispatch) => {
-       let socket = new SockJS('http://localhost:8080/taca-websocket');
+       let socket = new SockJS(`${API_BASE_URL}/taca-websocket`);
        stompClient = Stomp.over(socket);
        stompClient.connect({}, function (frame) {
            stompClient.subscribe(`/room/${roomId}`, function (message) {
