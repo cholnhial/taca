@@ -1,7 +1,7 @@
 package com.cholnhial.taca.service;
 
 import com.cholnhial.taca.service.dto.MessageToneRequestDTO;
-import com.cholnhial.taca.service.dto.MessageToneResponseDTO;
+import com.cholnhial.taca.service.dto.ToneResponseDTO;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.watson.tone_analyzer.v3.ToneAnalyzer;
 import com.ibm.watson.tone_analyzer.v3.model.ToneAnalysis;
@@ -43,8 +43,8 @@ public class IBMToneAnalyzerService {
         return emotionTones.contains(tone);
     }
 
-    public MessageToneResponseDTO processMessage(MessageToneRequestDTO request) {
-        return new MessageToneResponseDTO(getMessageTone(request.getMessage()));
+    public ToneResponseDTO processMessage(MessageToneRequestDTO request) {
+        return new ToneResponseDTO(getMessageTone(request.getMessage()));
     }
 
 }

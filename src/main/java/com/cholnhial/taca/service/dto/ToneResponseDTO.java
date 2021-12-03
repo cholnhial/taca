@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MessageToneResponseDTO {
+public class ToneResponseDTO {
     private String tone;
 }

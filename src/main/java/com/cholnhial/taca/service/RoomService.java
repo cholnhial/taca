@@ -4,7 +4,9 @@ import com.cholnhial.taca.domain.Message;
 import com.cholnhial.taca.domain.Room;
 import com.cholnhial.taca.domain.User;
 import com.cholnhial.taca.repository.RoomRepository;
+import com.cholnhial.taca.service.dto.ToneResponseDTO;
 import com.cholnhial.taca.service.dto.UserMessageDTO;
+import com.cholnhial.taca.service.exception.RoomNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
@@ -12,8 +14,10 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -22,6 +26,7 @@ public class RoomService {
 
     private final RoomRepository roomRepository;
     private final UserService userService;
+    private final IBMToneAnalyzerService ibmToneAnalyzerService;
 
     /**
      *
@@ -72,5 +77,21 @@ public class RoomService {
      */
     public Optional<Room> getRoomByRoomTopicId(String roomId) {
         return this.roomRepository.findRoomByRoomTopicId(roomId);
+    }
+
+    /**
+     *  Gets the tone of the room based on the last 10 messages sent to room
+     *
+     * @param roomId the room to get the tone for
+     * @return the DTO containing tone
+     */
+    public ToneResponseDTO getRoomMessagesTone(String roomId) {
+        String messages = this.roomRepository.findRoomByRoomTopicId(roomId).orElseThrow(() -> new RoomNotFoundException("Room Not Found"))
+                .getMessages().stream()
+                .sorted(Comparator.comparing(Message::getSent).reversed())
+                .limit(10)
+                .map(Message::getMessage).collect(Collectors.joining("\n"));
+
+        return new ToneResponseDTO(ibmToneAnalyzerService.getMessageTone(messages));
     }
 }
