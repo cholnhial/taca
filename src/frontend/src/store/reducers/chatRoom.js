@@ -43,7 +43,7 @@ const addMessage = (state, action) => {
 }
 
 const setOtherUser = (state, action) => {
-    return updateObject({
+    return updateObject(state,{
         otherUser: action.otherUsername
     })
 }
