@@ -42,12 +42,19 @@ const addMessage = (state, action) => {
     return object;
 }
 
+const setOtherUser = (state, action) => {
+    return updateObject({
+        otherUser: action.otherUsername
+    })
+}
+
 const reducer = (state = initialState, action) => {
 
     switch(action.type) {
         case actionTypes.SET_MESSAGE_TONE: return setMessageTone(state, action);
         case actionTypes.GET_MESSAGE_TONE_FAILED: return getMessageToneFailed(state, action);
-        case actionTypes.ADD_MESSAGE: return addMessage(state, action)
+        case actionTypes.ADD_MESSAGE: return addMessage(state, action);
+        case actionTypes.SET_OTHER_USER: return setOtherUser(state, action)
         default: return state;
     }
 };

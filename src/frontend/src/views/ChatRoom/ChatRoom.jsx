@@ -15,6 +15,10 @@ const ChatRoom = (props) => {
         props.connectToRoom(props.roomId);
     }, [])
 
+    useEffect(() => {
+        props.setOtherUsername(props.otherUser)
+    }, [props.otherUser])
+
     function handleOnMessageInputDebounceFn(message) {
         props.getMessageTone(message);
     }
@@ -49,7 +53,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getMessageTone: (message) => dispatch(actions.getMessageTone(message)),
         sendMessage: (message, roomId, username) => dispatch(actions.sendMessage(message,roomId, username)),
-        connectToRoom: (roomId) => dispatch(actions.connect(roomId))
+        connectToRoom: (roomId) => dispatch(actions.connect(roomId)),
+        setOtherUsername: (otherUsername) =>  dispatch(actions.setOtherUser(otherUsername))
     }
 }
 

@@ -16,5 +16,6 @@ export {
     getMessageTone,
     connect,
     addMessage,
-    sendMessage
+    sendMessage,
+    setOtherUser
 } from './chatRoom';

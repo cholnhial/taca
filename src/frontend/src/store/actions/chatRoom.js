@@ -53,3 +53,10 @@ export const sendMessage = (message, roomId, username) => {
         stompClient.send(`/app/message/${roomId}`, {}, JSON.stringify({from: username, message: message}))
     }
 }
+
+export const setOtherUser = (otherUsername) => {
+    return {
+        type: actionTypes.SET_OTHER_USER,
+        otherUsername: otherUsername
+    }
+}

@@ -7,6 +7,7 @@ export const SET_USERNAME = 'SET_USERNAME';
 
 export const SET_MESSAGE_TONE  = 'SET_MESSAGE_TONE';
 export const GET_MESSAGE_TONE_FAILED = 'GET_MESSAGE_TONE_FAILED';
-export const ADD_MESSAGE = 'SET_MESSAGE';
+export const ADD_MESSAGE = 'ADD_MESSAGE';
+export const SET_OTHER_USER = 'SET_OTHER_USER';
 export const SEND_MESSAGE = 'SEND_MESSAGE';
 
