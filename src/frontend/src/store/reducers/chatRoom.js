@@ -27,11 +27,19 @@ const getMessageToneFailed = (state, action) => {
 }
 
 const addMessage = (state, action) => {
-    return updateObject(state, {
-            messages: [...state.messages, action.message],
-            otherUserLastMessageTone: emojiMap[action.message.tone]
+    let object = updateObject(state, {
+            messages: [...state.messages, action.message]
         }
-    )
+    );
+
+    // Only set tone when message comes from other user
+    if (state.otherUser === action.message.from) {
+        object = updateObject(object, {
+            otherUserLastMessageTone: emojiMap[action.message.tone]
+        })
+    }
+
+    return object;
 }
 
 const reducer = (state = initialState, action) => {
