@@ -35,7 +35,7 @@ const addMessage = (state, action) => {
     // Only set tone when message comes from other user
     if (state.otherUser === action.message.from) {
         object = updateObject(object, {
-            otherUserLastMessageTone: {...emojiMap[action.message.tone]}
+            otherUserLastMessageTone: emojiMap[action.message.tone]
         })
     }
 
