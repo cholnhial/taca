@@ -19,6 +19,18 @@ const ChatRoom = (props) => {
         props.setOtherUsername(props.otherUser)
     }, [props.otherUser])
 
+    useEffect(() => {
+        document.body.style.backgroundImage = `url(${props.backgroundImage})`;
+    }, [props.backgroundImage]);
+
+    /* Fetch a new background based on tone every 30 seconds */
+    useEffect(() => {
+        const interval = setInterval(() => {
+            props.fetchToneBackground(props.otherUserLastMessageTone)
+        }, 30000);
+        return () => clearInterval(interval);
+    }, []);
+
     function handleOnMessageInputDebounceFn(message) {
         props.getMessageTone(message);
     }
@@ -45,7 +57,8 @@ const mapStateToProps = (state) => {
         otherUserLastMessageTone: state.chatRoom.otherUserLastMessageTone,
         messages: state.chatRoom.messages,
         username: state.joinRoom.username,
-        messageTone: state.chatRoom.messageTone
+        messageTone: state.chatRoom.messageTone,
+        backgroundImage: state.chatRoom.backgroundImage
     }
 }
 
@@ -54,7 +67,8 @@ const mapDispatchToProps = (dispatch) => {
         getMessageTone: (message) => dispatch(actions.getMessageTone(message)),
         sendMessage: (message, roomId, username) => dispatch(actions.sendMessage(message,roomId, username)),
         connectToRoom: (roomId) => dispatch(actions.connect(roomId)),
-        setOtherUsername: (otherUsername) =>  dispatch(actions.setOtherUser(otherUsername))
+        setOtherUsername: (otherUsername) =>  dispatch(actions.setOtherUser(otherUsername)),
+        fetchToneBackground: (tone) => dispatch(actions.fetchToneBackground(tone))
     }
 }
 

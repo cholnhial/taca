@@ -17,5 +17,7 @@ export {
     connect,
     addMessage,
     sendMessage,
-    setOtherUser
+    setOtherUser,
+    setBackgroundUrl,
+    fetchToneBackground
 } from './chatRoom';

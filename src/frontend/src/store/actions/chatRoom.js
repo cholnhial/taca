@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from "../../axios-api";
 import {API_BASE_URL, emojiMap} from "../../constants";
+import _ from 'lodash';
 
 export const setMessageTone = (messageTone) => {
     return {
@@ -58,5 +59,25 @@ export const setOtherUser = (otherUsername) => {
     return {
         type: actionTypes.SET_OTHER_USER,
         otherUsername: otherUsername
+    }
+}
+
+export const setBackgroundUrl = (url) => {
+    return {
+        type: actionTypes.SET_BACKGROUND_URL,
+        url: url
+    }
+}
+
+export const fetchToneBackground = (tone) => {
+    return (dispatch) => {
+        axios.get(`https://api.unsplash.com/search/photos?orientation=landscape&client_id=os_bboAd8rSMQeeQVQuUL5dmm9E7ZsyDcoQbb5ohU3U&query=${tone.text}&content_filter=high`)
+            .then((response) => {
+                const randomImage = _.sample(response.data.results);
+                dispatch(setBackgroundUrl(randomImage.urls.full));
+            })
+            .catch((error) => {
+                // don't know what to do with it now
+            })
     }
 }

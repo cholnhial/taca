@@ -11,3 +11,4 @@ export const emojiMap = {
 
 export const RESOURCES_BASE_URL = import.meta.env.VITE_RESOURCES_BASE;
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+export const DEFAULT_BACKGROUND = `${RESOURCES_BASE_URL}/images/chat-background.jpeg`;

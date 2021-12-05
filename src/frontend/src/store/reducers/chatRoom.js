@@ -1,6 +1,6 @@
 import * as actionTypes from "../actions/actionTypes";
 import * as constants from '../../constants';
-import {emojiMap} from '../../constants';
+import {DEFAULT_BACKGROUND, emojiMap} from '../../constants';
 import {updateObject} from "../utility";
 
 const initialState = {
@@ -10,6 +10,7 @@ const initialState = {
     otherUserLastMessageTone: constants.emojiMap.unknown,
     messageTone: null,
     messages: [],
+    backgroundImage: DEFAULT_BACKGROUND,
     error: false
 };
 
@@ -48,13 +49,20 @@ const setOtherUser = (state, action) => {
     })
 }
 
+const setBackgroundUrl = (state, action) => {
+    return updateObject(state, {
+        backgroundImage: action.url
+    })
+}
+
 const reducer = (state = initialState, action) => {
 
     switch(action.type) {
         case actionTypes.SET_MESSAGE_TONE: return setMessageTone(state, action);
         case actionTypes.GET_MESSAGE_TONE_FAILED: return getMessageToneFailed(state, action);
         case actionTypes.ADD_MESSAGE: return addMessage(state, action);
-        case actionTypes.SET_OTHER_USER: return setOtherUser(state, action)
+        case actionTypes.SET_OTHER_USER: return setOtherUser(state, action);
+        case actionTypes.SET_BACKGROUND_URL: return setBackgroundUrl(state, action)
         default: return state;
     }
 };
