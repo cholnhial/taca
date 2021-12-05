@@ -6,11 +6,11 @@ TACA is a demo application that aims to demonstrate Spring Websockets and IBM Wa
 
 ## Joining chat
 
-Messaging between two users happens in a room. Rooms have unique alphanumeric ids that identify them.
+Messaging between two users happens in a room. Rooms have unique random alphanumeric ids that identify them.
 It's probably not the best way to secure them. A room has messages which the mood is later extracted from.
 
-To start talking you must find a partner. So when you click join the system is searching for a partner who is not in a chat.
-Once found both of you are created a room. Your super secret room id is communicated over HTTPS and then is used to subscribe websocket to.
+To start talking you must find a partner. So when you click join, the system is searching for a partner who is not in a chat.
+Once found, both of you are created a room. Your super secret room id is communicated over HTTPS and then is used to subscribe websocket to.
 
 ## Messaging
 
