@@ -19,9 +19,20 @@ const Chat = (props) => {
         props.onMessageChange(event.target.value);
     }
 
-    const handleOnSendMessage = () => {
+    const sendMessage = () => {
         props.sendMessageHandler();
         setMessage('');
+    }
+
+    const handleOnSendMessage = () => {
+        sendMessage();
+    }
+
+    const handleOnKeyUp = (event) => {
+
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
     }
 
     /* Copied from https://codesandbox.io/s/8l2y0o24x9?file=/src/index.js
@@ -53,6 +64,7 @@ const Chat = (props) => {
                         as="textarea"
                         value={message}
                         onChange={handleMessageInputChange}
+                        onKeyUp={handleOnKeyUp}
                         placeholder="Hi..."
                         style={{ height: '60px' }}
                     />
