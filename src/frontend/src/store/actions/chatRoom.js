@@ -69,15 +69,16 @@ export const setBackgroundUrl = (url) => {
     }
 }
 
-export const fetchToneBackground = (tone) => {
-    return (dispatch) => {
-        axios.get(`https://api.unsplash.com/search/photos?orientation=landscape&client_id=os_bboAd8rSMQeeQVQuUL5dmm9E7ZsyDcoQbb5ohU3U&query=${tone.text}&content_filter=high`)
-            .then((response) => {
+export const fetchToneBackground = (roomId) => {
+    return async (dispatch) => {
+        let response  = await axios.get(`/tone-analyzer/room/${roomId}`)
+        if (response.status == 200) {
+            const tone = emojiMap[response.data.tone];
+            await response = axios.get(`https://api.unsplash.com/search/photos?orientation=landscape&client_id=os_bboAd8rSMQeeQVQuUL5dmm9E7ZsyDcoQbb5ohU3U&query=${tone.text}&content_filter=high`);
+            if (response.status == 200) {
                 const randomImage = _.sample(response.data.results);
                 dispatch(setBackgroundUrl(randomImage.urls.full));
-            })
-            .catch((error) => {
-                // don't know what to do with it now
-            })
+            }
+        }
     }
 }

@@ -62,7 +62,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.GET_MESSAGE_TONE_FAILED: return getMessageToneFailed(state, action);
         case actionTypes.ADD_MESSAGE: return addMessage(state, action);
         case actionTypes.SET_OTHER_USER: return setOtherUser(state, action);
-        case actionTypes.SET_BACKGROUND_URL: return setBackgroundUrl(state, action)
+        case actionTypes.SET_BACKGROUND_URL: return setBackgroundUrl(state, action);
         default: return state;
     }
 };

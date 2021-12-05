@@ -26,7 +26,7 @@ const ChatRoom = (props) => {
     /* Fetch a new background based on tone every 30 seconds */
     useEffect(() => {
         const interval = setInterval(() => {
-            props.fetchToneBackground(props.otherUserLastMessageTone)
+            props.fetchToneBackground(props.roomId)
         }, 30000);
         return () => clearInterval(interval);
     }, []);
