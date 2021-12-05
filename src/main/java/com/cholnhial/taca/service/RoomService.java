@@ -9,10 +9,13 @@ import com.cholnhial.taca.service.dto.UserMessageDTO;
 import com.cholnhial.taca.service.exception.RoomNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Optional;
@@ -93,5 +96,32 @@ public class RoomService {
                 .map(Message::getMessage).collect(Collectors.joining("\n"));
 
         return new ToneResponseDTO(ibmToneAnalyzerService.getMessageTone(messages));
+    }
+
+    /**
+     *  The main goal is to clean up rooms that have been inactive for 2hrs
+     *  checks happen every 10 minutes
+     */
+    @Async
+    @Scheduled(cron = "* */10 * * * ?")
+    public void cleanRooms() {
+        this.roomRepository.findAll().forEach(r -> {
+            if (shouldBeCleanedUp(r.getMessages())) {
+                // clean up
+                this.userService.delete(r.getUser1());
+                this.userService.delete(r.getUser2());
+                this.roomRepository.delete(r);
+            }
+        });
+    }
+
+    private boolean shouldBeCleanedUp(Set<Message> messages) {
+        /* probably a inefficient way to get last message */
+        Optional<Message> lastMessage = messages.stream().max(Comparator.comparing(Message::getSent));
+
+        /* because IntelliJ suggested this */
+        return lastMessage.
+                filter(message -> ChronoUnit.HOURS.between(message.getSent(), LocalDateTime.now()) >= 2)
+                .isPresent();
     }
 }

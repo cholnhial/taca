@@ -4,16 +4,10 @@ import com.cholnhial.taca.domain.User;
 import com.cholnhial.taca.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -32,6 +26,10 @@ public class UserService {
 
     public User save(User user) {
         return userRepository.save(user);
+    }
+
+    public void delete(User user) {
+        this.userRepository.delete(user);
     }
 
     /**
