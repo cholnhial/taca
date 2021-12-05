@@ -74,7 +74,7 @@ export const fetchToneBackground = (roomId) => {
         let response  = await axios.get(`/tone-analyzer/room/${roomId}`)
         if (response.status == 200) {
             const tone = emojiMap[response.data.tone];
-            await response = axios.get(`https://api.unsplash.com/search/photos?orientation=landscape&client_id=os_bboAd8rSMQeeQVQuUL5dmm9E7ZsyDcoQbb5ohU3U&query=${tone.text}&content_filter=high`);
+            response = await axios.get(`https://api.unsplash.com/search/photos?orientation=landscape&client_id=os_bboAd8rSMQeeQVQuUL5dmm9E7ZsyDcoQbb5ohU3U&query=${tone.text}&content_filter=high`);
             if (response.status == 200) {
                 const randomImage = _.sample(response.data.results);
                 dispatch(setBackgroundUrl(randomImage.urls.full));
