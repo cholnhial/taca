@@ -75,8 +75,7 @@ const mapDispatchToProps = (dispatch) => {
         sendMessage: (message, roomId, username) => dispatch(actions.sendMessage(message,roomId, username)),
         connectToRoom: (roomId) => dispatch(actions.connect(roomId)),
         setOtherUsername: (otherUsername) =>  dispatch(actions.setOtherUser(otherUsername)),
-        fetchToneBackground: (tone) => dispatch(actions.fetchToneBackground(tone)),
-        setMessageLoading: (loading) => dispatch(actions.setMessageLoading(loading))
+        fetchToneBackground: (tone) => dispatch(actions.fetchToneBackground(tone))
     }
 }
 
