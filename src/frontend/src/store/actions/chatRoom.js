@@ -18,14 +18,18 @@ export const getMessageToneFailed = () => {
 
 export const getMessageTone = (message) => {
     return (dispatch) => {
-        axios.post(`/tone-analyzer/message`, {message: message})
-            .then((response) => {
-                dispatch(setMessageTone(emojiMap[response.data.tone]))
+        if (message.trim().length =x== 0) {
+            dispatch(setMessageTone(null));
+        } else {
+            axios.post(`/tone-analyzer/message`, {message: message})
+                .then((response) => {
+                    dispatch(setMessageTone(emojiMap[response.data.tone]))
 
-            })
-            .catch((error) => {
-                dispatch(getMessageToneFailed())
-            })
+                })
+                .catch((error) => {
+                    dispatch(getMessageToneFailed())
+                })
+        }
     }
 }
 

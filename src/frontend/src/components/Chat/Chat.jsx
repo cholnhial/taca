@@ -17,9 +17,6 @@ const Chat = (props) => {
     const handleMessageInputChange = (event) => {
         setMessage(event.target.value);
         props.onMessageChange(event.target.value);
-        if (message === '') {
-            props.messageTone = null;
-        }
     }
 
     const sendMessage = () => {
