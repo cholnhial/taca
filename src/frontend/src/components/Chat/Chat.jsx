@@ -71,7 +71,7 @@ const Chat = (props) => {
                 </FloatingLabel>
                 <Row className="mt-2">
                     <Col className="d-flex align-items-center" md={10}>
-                        <MessageTone tone={props.messageTone}  />
+                        <MessageTone loading={props.loadingToneMessage} tone={props.messageTone}  />
                     </Col>
                     <Col md={2}>
                         <Button onClick={handleOnSendMessage} className="tacaButton float-end">SEND</Button>

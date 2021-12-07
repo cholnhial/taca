@@ -21,13 +21,15 @@ export const getMessageTone = (message) => {
         if (message.trim().length == 0) {
             dispatch(setMessageTone(null));
         } else {
+            dispatch(setMessageLoading(true));
             axios.post(`/tone-analyzer/message`, {message: message})
                 .then((response) => {
                     dispatch(setMessageTone(emojiMap[response.data.tone]))
-
+                    dispatch(setMessageLoading(false));
                 })
                 .catch((error) => {
-                    dispatch(getMessageToneFailed())
+                    dispatch(getMessageToneFailed());
+                    dispatch(setMessageLoading(false));
                 })
         }
     }

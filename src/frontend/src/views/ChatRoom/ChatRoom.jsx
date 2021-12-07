@@ -45,7 +45,9 @@ const ChatRoom = (props) => {
     }
 
     return (
-        <Chat otherUsername={props.otherUser} username={props.username}
+        <Chat
+              loadingToneMessage={props.loadingToneMessage}
+              otherUsername={props.otherUser} username={props.username}
               sendMessageHandler={handleOnSendMessage} messages={props.messages}
               roomId={props.roomId} messageTone={props.messageTone}
               onMessageChange={handleOnMessageInputChange}
