@@ -19,5 +19,6 @@ export {
     sendMessage,
     setOtherUser,
     setBackgroundUrl,
-    fetchToneBackground
+    fetchToneBackground,
+    setMessageLoading
 } from './chatRoom';

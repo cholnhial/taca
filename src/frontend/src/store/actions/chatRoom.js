@@ -82,3 +82,10 @@ export const fetchToneBackground = (roomId) => {
         }
     }
 }
+
+export const setMessageLoading = (loading) => {
+    return {
+        type: actionTypes.SET_MESSAGE_TONE,
+        loading: loading
+    }
+}

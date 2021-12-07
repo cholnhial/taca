@@ -45,7 +45,11 @@ const ChatRoom = (props) => {
     }
 
     return (
-        <Chat otherUsername={props.otherUser} username={props.username} sendMessageHandler={handleOnSendMessage} messages={props.messages} roomId={props.roomId} messageTone={props.messageTone} onMessageChange={handleOnMessageInputChange} otherUserMessageTone={props.otherUserLastMessageTone}/>
+        <Chat otherUsername={props.otherUser} username={props.username}
+              sendMessageHandler={handleOnSendMessage} messages={props.messages}
+              roomId={props.roomId} messageTone={props.messageTone}
+              onMessageChange={handleOnMessageInputChange}
+              otherUserMessageTone={props.otherUserLastMessageTone}/>
     )
 }
 
@@ -58,7 +62,8 @@ const mapStateToProps = (state) => {
         messages: state.chatRoom.messages,
         username: state.joinRoom.username,
         messageTone: state.chatRoom.messageTone,
-        backgroundImage: state.chatRoom.backgroundImage
+        backgroundImage: state.chatRoom.backgroundImage,
+        loadingToneMessage: state.chatRoom.loadingToneMessage
     }
 }
 
@@ -68,7 +73,8 @@ const mapDispatchToProps = (dispatch) => {
         sendMessage: (message, roomId, username) => dispatch(actions.sendMessage(message,roomId, username)),
         connectToRoom: (roomId) => dispatch(actions.connect(roomId)),
         setOtherUsername: (otherUsername) =>  dispatch(actions.setOtherUser(otherUsername)),
-        fetchToneBackground: (tone) => dispatch(actions.fetchToneBackground(tone))
+        fetchToneBackground: (tone) => dispatch(actions.fetchToneBackground(tone)),
+        setMessageLoading: (loading) => dispatch(actions.setMessageLoading(loading))
     }
 }
 

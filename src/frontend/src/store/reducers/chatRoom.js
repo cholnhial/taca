@@ -9,6 +9,7 @@ const initialState = {
     otherUser: '',
     otherUserLastMessageTone: constants.emojiMap.unknown,
     messageTone: null,
+    loadingToneMessage: false,
     messages: [],
     backgroundImage: DEFAULT_BACKGROUND,
     error: false
@@ -55,6 +56,13 @@ const setBackgroundUrl = (state, action) => {
     })
 }
 
+
+const setMessageLoading = (state, action) => {
+    return updateObject(state, {
+        loadingToneMessage: action.loading
+    })
+}
+
 const reducer = (state = initialState, action) => {
 
     switch(action.type) {
@@ -63,6 +71,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.ADD_MESSAGE: return addMessage(state, action);
         case actionTypes.SET_OTHER_USER: return setOtherUser(state, action);
         case actionTypes.SET_BACKGROUND_URL: return setBackgroundUrl(state, action);
+        case actionTypes.SET_MESSAGE_LOADING: return setMessageLoading(state, action);
         default: return state;
     }
 };
