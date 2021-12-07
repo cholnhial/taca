@@ -18,7 +18,7 @@ export const getMessageToneFailed = () => {
 
 export const getMessageTone = (message) => {
     return (dispatch) => {
-        if (message.trim().length =x== 0) {
+        if (message.trim().length == 0) {
             dispatch(setMessageTone(null));
         } else {
             axios.post(`/tone-analyzer/message`, {message: message})
