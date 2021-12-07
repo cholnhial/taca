@@ -55,6 +55,7 @@ export const connect = (roomId) => {
 
 export const sendMessage = (message, roomId, username) => {
     return (dispatch) => {
+        dispatch(setMessageTone(null));
         stompClient.send(`/app/message/${roomId}`, {}, JSON.stringify({from: username, message: message}))
     }
 }
